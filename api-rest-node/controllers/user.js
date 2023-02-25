@@ -176,19 +176,17 @@ const controller = {
 
     update: function(req, res){
         // *****CREAR MIDDLEWARE PARA COMPROBAR EL JWT TOKEN QUE PONEMOS A LA RUTA*****
-        
         // ?RECOGER DATOS DEL USUARIO
-        const params = req.body;
+        var params = req.body;
 
         // ?VALIDAR DATOS
         try{
             var validate_name = !validator.isEmpty(params.name);
-            var validate_surname = !validator.isEmpty(params.surname);;
+            var validate_surname = !validator.isEmpty(params.surname);
             var validate_email = validator.isEmail(params.email) && !validator.isEmpty(params.email);
         }catch(err){
             res.status(400).send({
                 message: "Faltan datos por enviar",
-                params
             });
         }
         
@@ -199,6 +197,7 @@ const controller = {
 
         // ? COMPROBAR SI EL EMAIL ES ÚNICO
         if(req.user.email != params.email){
+
             User.findOne({email: params.email.toLowerCase()}, (err, user) => {
 
                 if(err){
@@ -211,35 +210,35 @@ const controller = {
                     return res.status(400).send({
                         message: 'El email ya existe y no puede ser modificado'
                     });
+                }
+            });    
+        }else{
 
-                }else{
-                     // ? BUSCAR Y ACTUALIZAR DOCUMENTO
-                    // ? User.findOneAndUpdate(condicion, datos a actualizar, opciones, callback)
-                    User.findOneAndUpdate({_id: userId}, params, {new:true},(err, userUpdated) => {
-                            
-                        if(err){
-                            return res.status(500).send({
-                                status: 'error',
-                                message: 'Error al actualizar usuario'
-                            });
-                        }
-
-                        if(!userUpdated){
-                            return res.status(400).send({
-                                status: 'error',
-                                message: 'No se ha podido actualizar el usuario'
-                            });
-                        }
-                        
-                        // ? DEVOLVER UNA RESPUESTA
-                        return res.status(200).send({
-                            status: 'success',
-                            user: userUpdated
-                        });
+            // ? BUSCAR Y ACTUALIZAR DOCUMENTO
+            // ? User.findOneAndUpdate(condicion, datos a actualizar, opciones, callback)
+            User.findOneAndUpdate({_id: userId}, params, {new:true},(err, userUpdated) => {
+                    
+                if(err){
+                    return res.status(500).send({
+                        status: 'error',
+                        message: 'Error al actualizar usuario'
                     });
                 }
+
+                if(!userUpdated){
+                    return res.status(400).send({
+                        status: 'error',
+                        message: 'No se ha podido actualizar el usuario'
+                    });
+                }
+                
+                // ? DEVOLVER UNA RESPUESTA
+                return res.status(200).send({
+                    status: 'success',
+                    user: userUpdated
+                });
             });
-        }
+        }   
     },
 
     uploadAvatar: function(req, res){
