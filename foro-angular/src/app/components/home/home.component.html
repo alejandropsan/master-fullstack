@@ -5,15 +5,15 @@
         <h1 class="display-4">{{ pageTitle }}</h1>
         <p class="lead">Escribe todas tus dudas y pensamientos sobre este mundo de la programación y aporta todo lo que sabes</p>
         <p>
-          <a class="btn btn-primary btn-lg mr-3" href="">
+          <a class="btn btn-primary btn-lg mr-3" [routerLink]="['/temas']">
               Ver temas
           </a>
 
-          <a class="btn btn-success btn-lg mr-3" href="">
+          <a class="btn btn-success btn-lg mr-3" [routerLink]="['/usuarios']">
             Ver compañeros
         </a>
 
-        <a class="btn btn-warning btn-lg mr-3" href="">
+        <a class="btn btn-warning btn-lg mr-3" [routerLink]="['/panel/crear']">
           Añade un nuevo tema
       </a>
         </p>

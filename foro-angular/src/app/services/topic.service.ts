@@ -61,4 +61,9 @@ export class TopicService {
   }
 
 
+  search(searchString: string): Observable<any>{
+    return this._http.get(this.url + 'search/' + searchString);
+  }
+
+
 }

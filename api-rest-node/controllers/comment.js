@@ -61,13 +61,28 @@ const controller = {
                             });
                         }
 
-                        // DEVOLVER UNA RESPUESTA
+                        Topic.findById(topic._id)
+                        .populate('user')
+                        .populate('comments.user')
+                        .exec((err, topic) => {
+
+                        if(err){
+                            return res.status(500).send({
+                                status: 'error',
+                                message: 'No existe el tema'
+                            });
+                        }
+
+                        // ? DEVOLVER RESULTADO
                         return res.status(200).send({
                             status: 'success',
                             topic
                         });
+                    });
 
                     });
+
+
                     
                 }else{
                     return res.status(400).send({
@@ -175,10 +190,23 @@ const controller = {
                         });
                     }
 
-                    // DEVOLVER UN RESULTADO
-                    return res.status(200).send({
-                    status: 'success',
-                    topic
+                    Topic.findById(topic._id)
+                        .populate('user')
+                        .populate('comments.user')
+                        .exec((err, topic) => {
+
+                        if(err){
+                            return res.status(500).send({
+                                status: 'error',
+                                message: 'No existe el tema'
+                            });
+                        }
+
+                        // ? DEVOLVER RESULTADO
+                        return res.status(200).send({
+                            status: 'success',
+                            topic
+                        });
                     });
                 });
 

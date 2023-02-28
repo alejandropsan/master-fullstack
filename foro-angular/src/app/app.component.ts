@@ -14,6 +14,7 @@ export class AppComponent implements OnInit, DoCheck{
   public identity: any;
   public token: any;
   public url: any;
+  public search: any;
 
   constructor(
     private _userService: UserService,
@@ -40,6 +41,15 @@ export class AppComponent implements OnInit, DoCheck{
     this.identity = null;
     this.token = null;
     this._router.navigate(['inicio']);
+  }
+
+
+  goSearch(){
+    this._router.navigate(['buscar', this.search]);
+
+    //redireccion para cuando estamos sobre la ruta de SearchComponent y renderizar la pagina de nuevo
+    this._router.navigateByUrl('/inicio', {skipLocationChange: true}).then(()=>
+    this._router.navigate(['/buscar/' + this.search]));
   }
 
 

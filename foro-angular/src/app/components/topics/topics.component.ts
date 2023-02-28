@@ -18,6 +18,7 @@ export class TopicsComponent implements OnInit{
   public next_page: any;
   public prev_page: any;
   public number_pages: any;
+  public noPaginate: boolean;
 
   constructor(
     private _router: Router,
@@ -26,6 +27,7 @@ export class TopicsComponent implements OnInit{
   ){
     this.pageTitle = 'Todos los temas';
     this.topics = [];
+    this.noPaginate = false;
   }
 
   ngOnInit() {
