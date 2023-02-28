@@ -13,10 +13,10 @@
           <a class="nav-link" [routerLink]="['/inicio']">Inicio <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Temas</a>
+          <a class="nav-link" [routerLink]="['/temas']">Temas</a>
         </li>
         <li class="nav-item" *ngIf="identity">
-          <a class="nav-link" href="#">Crear Temas</a>
+          <a class="nav-link" [routerLink]="['/panel/crear']">Crear Temas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" *ngIf="identity">Compañeros</a>
@@ -52,7 +52,7 @@
             {{ identity.name + ' ' + identity.surname}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Panel de usuario</a>
+            <a class="dropdown-item" [routerLink]="['/panel']">Panel de usuario</a>
             <a class="dropdown-item" href="#">Mi perfil</a>
             <a class="dropdown-item" [routerLink]="['/ajustes']">Ajustes</a>
             <div class="dropdown-divider"></div>
